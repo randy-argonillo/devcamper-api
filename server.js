@@ -1,8 +1,11 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const db = require('./config/db');
 const _colors = require('colors');
+
+const db = require('./config/db');
+const errorMiddleware = require('./middlewares/errorHandler');
+
 
 // Load env variables
 dotenv.config({ path: './config/.env' });
@@ -19,6 +22,8 @@ app.use(express.json()) // to parse the body payload
 
 // Mount routes middleware
 app.use('/api/v1/bootcamps', require('./routes/bootcamps').router);
+
+app.use(errorMiddleware)
 
 // Start server
 const port = process.env.PORT || 5000;

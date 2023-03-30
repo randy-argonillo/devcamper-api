@@ -12,7 +12,7 @@ const BootcampSchema = new mongoose.Schema(
     slug: String,
     description: {
       type: String,
-      description: [true, 'Please add a description'],
+      required: [true, 'Please add a description'],
       maxlength: [500, 'Description cannot be more than 500 characters']
     },
     website: {
@@ -28,6 +28,7 @@ const BootcampSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+      required: [true, 'Please add an email'],
       match: [
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         'Please add a valid email'
