@@ -1,8 +1,8 @@
-const wrap = fn => (req, res, next) => {
+const wrap = (fn) => (req, res, next) => {
   if (!isFunc(fn)) {
     throw new Error('Pass value for fn is not a function');
   }
-  
+
   if (!isAsyncFunc(fn)) {
     return fn(req, res, next);
   }
@@ -10,11 +10,10 @@ const wrap = fn => (req, res, next) => {
   fn(req, res, next).catch(next);
 };
 
-const wrapObject = obj => {
+const wrapObject = (obj) => {
   const newObj = {};
-  const keys = Object.keys(obj);
 
-  keys.forEach(key => {
+  Object.keys(obj).forEach((key) => {
     const val = obj[key];
     if (isAsyncFunc(val)) {
       newObj[key] = wrap(val);
@@ -36,5 +35,5 @@ function isAsyncFunc(fn) {
 
 module.exports = {
   wrap,
-  wrapObject
+  wrapObject,
 };

@@ -1,10 +1,12 @@
 const validationErrorHandler = require('./validationErrorHandler');
 const defaultErrorHandler = require('./defaultErrorHandler');
 const castErrorHandler = require('./castErrorHandler');
+const mongoServerErrorHandler = require('./mongoServerErrorHandler');
 
 const errorHandlers = {
   ValidationError: validationErrorHandler,
   CastError: castErrorHandler,
+  MongoServerError: mongoServerErrorHandler,
   default: defaultErrorHandler
 }
 
